@@ -1,0 +1,682 @@
+/* ==========================================================================
+   PROJECT: HARSHITH — AN IMMERSIVE DIGITAL EXPERIENCE
+   Palette Foundation:
+   - Primary: #2F4454 (Deep desaturated blue)
+   - Secondary: #2E151B (Dark burgundy)
+   - Accent: #DA7B93 (Vibrant dusty pink)
+   - Additional: #376E6F (Deep teal)
+   - Background: #1C3334 (Dark green-teal)
+   - Accents: Electric lavender (#B794F4), Icy cyan (#67E8F9), Soft coral (#FB7185)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Palette Foundations */
+  --c-primary: #2F4454;
+  --c-secondary: #2E151B;
+  --c-accent: #DA7B93;
+  --c-teal: #376E6F;
+  --c-bg: #1C3334;
+
+  /* Complementary Accents */
+  --c-lavender: #B794F4;
+  --c-cyan: #67E8F9;
+  --c-coral: #FB7185;
+
+  /* Atmospheric Surfaces */
+  --surface-dark: #142425;
+  --surface-panel: rgba(47, 68, 84, 0.45);
+  --surface-border: rgba(218, 123, 147, 0.22);
+  --surface-border-subtle: rgba(55, 110, 111, 0.35);
+
+  /* Typography */
+  --font-primary: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Text Colors */
+  --text-primary: #F3F6F8;
+  --text-secondary: #B4C5CF;
+  --text-muted: #7A939E;
+  --text-accent: #DA7B93;
+
+  /* Spacing Scale (from landing-page-design B2) */
+  --spacing-0: 0px;
+  --spacing-25: 2px;
+  --spacing-50: 4px;
+  --spacing-75: 8px;
+  --spacing-100: 12px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-700: 64px;
+  --spacing-800: 80px;
+  --spacing-900: 96px;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Motion Curves (from B7) */
+  --ease-base: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-layout: 500ms;
+  --duration-hover: 300ms;
+  --duration-reveal: 800ms;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-primary);
+  background-color: var(--c-bg);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.5;
+  cursor: none; /* Replaced by custom magnetic cursor */
+}
+
+/* No italics rule (B1) */
+*, *::before, *::after {
+  font-style: normal !important;
+}
+
+/* No orphaned words */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+p, li, blockquote {
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   CUSTOM MAGNETIC CURSOR
+   ========================================================================== */
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--c-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 80ms ease, background-color var(--duration-hover) var(--ease-base);
+  box-shadow: 0 0 12px var(--c-accent);
+}
+
+.custom-cursor-aura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(218, 123, 147, 0.45);
+  background-color: rgba(218, 123, 147, 0.08);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 300ms var(--ease-base),
+              height 300ms var(--ease-base),
+              border-color 300ms var(--ease-base),
+              background-color 300ms var(--ease-base);
+}
+
+/* Hovering on interactive elements */
+body.cursor-hover .custom-cursor-aura {
+  width: 64px;
+  height: 64px;
+  border-color: var(--c-cyan);
+  background-color: rgba(103, 232, 249, 0.12);
+}
+
+body.cursor-hover .custom-cursor-dot {
+  background-color: var(--c-cyan);
+  box-shadow: 0 0 16px var(--c-cyan);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+@media (pointer: coarse) {
+  body {
+    cursor: auto !important;
+  }
+  .custom-cursor-dot, .custom-cursor-aura {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   SECTION-TO-SECTION ATMOSPHERIC COLOR TRANSITIONS
+   ========================================================================== */
+
+.section-stage {
+  position: relative;
+  width: 100%;
+  padding: var(--spacing-900) var(--spacing-400);
+  transition: background-color 1000ms var(--ease-base);
+}
+
+.theme-hero {
+  background-color: #1C3334;
+}
+
+.theme-about {
+  background-color: #2F4454;
+}
+
+.theme-journey {
+  background-color: #2E151B;
+}
+
+.theme-projects {
+  background-color: #1C3334;
+}
+
+.theme-skills {
+  background-color: #2F4454;
+}
+
+.theme-vision {
+  background-color: #2E151B;
+}
+
+.theme-contact {
+  background-color: #1C3334;
+}
+
+/* Ambient glow orb layers (non-gradient, subtle lighting) */
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   HERO 3D PARTICLE TYPOGRAPHY STAGE
+   ========================================================================== */
+
+#hero-experience {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--c-bg);
+}
+
+#particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+}
+
+/* Particle phase indicators */
+.particle-stage-nav {
+  position: absolute;
+  bottom: var(--spacing-400);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  padding: 6px 14px;
+  background: rgba(47, 68, 84, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+}
+
+.stage-dot {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all var(--duration-hover) var(--ease-base);
+}
+
+.stage-dot.is-active {
+  width: 48px;
+  background-color: var(--c-accent);
+  box-shadow: 0 0 10px var(--c-accent);
+}
+
+/* The Animated "COME ALONG →" Magnetic Button */
+#come-along-btn {
+  position: absolute;
+  bottom: 22%;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 28px;
+  background-color: var(--c-accent);
+  color: #1A0D11;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 36px rgba(218, 123, 147, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: opacity 600ms var(--ease-base),
+              background-color var(--duration-hover) var(--ease-base),
+              box-shadow var(--duration-hover) var(--ease-base);
+}
+
+#come-along-btn.is-revealed {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#come-along-btn:hover {
+  background-color: #E292A6;
+  box-shadow: 0 16px 48px rgba(218, 123, 147, 0.55);
+}
+
+#come-along-btn:active {
+  transform: scale(0.96) !important;
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+.floating-nav {
+  position: fixed;
+  top: var(--spacing-200);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-300);
+  background: rgba(28, 51, 52, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  padding: 8px 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.nav-brand {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-accent);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+}
+
+.nav-link {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-hover) var(--ease-base);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-student-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(218, 123, 147, 0.12);
+  border: 1px solid var(--surface-border);
+  color: var(--c-accent);
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   CINEMATIC TYPOGRAPHY STYLES
+   ========================================================================== */
+
+.display-title {
+  font-family: var(--font-primary);
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.display-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  display: inline-block;
+  margin-bottom: var(--spacing-75);
+}
+
+.body-lead {
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--text-secondary);
+  max-width: 640px;
+}
+
+/* ==========================================================================
+   ABOUT ME: 3D CYBERNETIC CORE & STORY
+   ========================================================================== */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-600);
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.about-3d-box {
+  width: 100%;
+  height: 420px;
+  position: relative;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--surface-border);
+  background: rgba(47, 68, 84, 0.35);
+  overflow: hidden;
+}
+
+#about-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.about-card-text {
+  padding: var(--spacing-400);
+  background: rgba(47, 68, 84, 0.25);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+}
+
+/* ==========================================================================
+   MY JOURNEY: INTERACTIVE NEURAL TIMELINE
+   ========================================================================== */
+
+.journey-container {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: var(--spacing-600);
+}
+
+.journey-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--c-accent) 0%, var(--c-teal) 50%, var(--c-cyan) 100%);
+  opacity: 0.4;
+}
+
+.journey-node {
+  position: relative;
+  margin-bottom: var(--spacing-600);
+  transition: transform var(--duration-hover) var(--ease-base);
+}
+
+.journey-dot {
+  position: absolute;
+  left: -48px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--c-secondary);
+  border: 2px solid var(--c-accent);
+  box-shadow: 0 0 10px var(--c-accent);
+  transition: transform var(--duration-hover) var(--ease-base), background-color var(--duration-hover) var(--ease-base);
+}
+
+.journey-node:hover .journey-dot {
+  transform: scale(1.4);
+  background-color: var(--c-accent);
+}
+
+.journey-content {
+  background: rgba(46, 21, 27, 0.45);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-300);
+  transition: border-color var(--duration-hover) var(--ease-base),
+              transform var(--duration-hover) var(--ease-base);
+}
+
+.journey-node:hover .journey-content {
+  border-color: var(--c-accent);
+  transform: translateX(6px);
+}
+
+/* ==========================================================================
+   PROJECTS: 3D INTERACTIVE GALLERY
+   ========================================================================== */
+
+.projects-gallery {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-600);
+}
+
+.project-item {
+  background: rgba(28, 51, 52, 0.6);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-400);
+  transition: transform var(--duration-layout) var(--ease-base),
+              border-color var(--duration-hover) var(--ease-base),
+              box-shadow var(--duration-hover) var(--ease-base);
+  perspective: 1000px;
+}
+
+.project-item:hover {
+  border-color: var(--c-accent);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+}
+
+/* ==========================================================================
+   TECH STACK: 3D CONSTELLATION CANVAS
+   ========================================================================== */
+
+.constellation-wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  position: relative;
+  height: 520px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--surface-border);
+  background: rgba(47, 68, 84, 0.35);
+  overflow: hidden;
+}
+
+#constellation-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.constellation-legend {
+  position: absolute;
+  bottom: var(--spacing-200);
+  right: var(--spacing-300);
+  background: rgba(20, 36, 37, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--surface-border-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   VISION: FUTURISTIC HORIZON
+   ========================================================================== */
+
+.vision-box {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: var(--spacing-700) var(--spacing-400);
+  text-align: center;
+  position: relative;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+  background: rgba(46, 21, 27, 0.5);
+  backdrop-filter: blur(12px);
+}
+
+/* ==========================================================================
+   CONTACT & COLLABORATION
+   ========================================================================== */
+
+.contact-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-600);
+  align-items: start;
+}
+
+.contact-card {
+  padding: var(--spacing-400);
+  background: rgba(28, 51, 52, 0.65);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+}
+
+.contact-input, .contact-textarea {
+  width: 100%;
+  background: rgba(20, 36, 37, 0.85);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: #FFFFFF;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  margin-top: 6px;
+  transition: border-color var(--duration-hover) var(--ease-base);
+}
+
+.contact-input:focus, .contact-textarea:focus {
+  outline: none;
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 1px var(--c-accent);
+}
+
+/* Social link pills */
+.social-link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(47, 68, 84, 0.4);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all var(--duration-hover) var(--ease-base);
+}
+
+.social-link-pill:hover {
+  background: var(--c-accent);
+  color: #1A0D11;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Checked at 390px)
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .about-grid, .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .display-title {
+    font-size: 34px;
+    line-height: 38px;
+  }
+  .floating-nav .nav-desktop-only {
+    display: none;
+  }
+  .journey-container {
+    padding-left: var(--spacing-400);
+  }
+  .journey-dot {
+    left: -32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  #come-along-btn {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

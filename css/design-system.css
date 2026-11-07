@@ -1,0 +1,780 @@
+/* ==========================================================================
+   LANDING PAGE DESIGN SYSTEM (Part B Compliance)
+   Strict Token Architecture: Typography, Spacing, Surfaces, Radii, Motion
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* B1. Typography Families */
+  --font-primary: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* B2. Spacing Tokens (Exact values from B2 table) */
+  --spacing-0: 0px;
+  --spacing-25: 2px;
+  --spacing-50: 4px;
+  --spacing-75: 8px;
+  --spacing-100: 12px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-700: 64px;
+  --spacing-800: 80px;
+  --spacing-900: 96px;
+
+  /* B4. Dark Mode Flat Surfaces (Strictly approved values) */
+  --surface-base: #000000;
+  --surface-card: #181818;
+  --surface-card-subtle: #1F1F1F;
+  --surface-border: #272727;
+  --surface-border-subtle: #313131;
+  --surface-accent-dark: #131209;
+
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9B9B9B;
+  --text-muted: #666666;
+  --text-dimmed: #444444;
+
+  /* Accent Highlight (Restrained gold/amber hue for status/badges) */
+  --accent-amber: #F59E0B;
+  --accent-amber-subtle: rgba(245, 158, 11, 0.12);
+  --accent-emerald: #10B981;
+  --accent-emerald-subtle: rgba(16, 185, 129, 0.12);
+
+  /* B3. Corner Radii (Tailwind Scale) */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+
+  /* B7. Motion Tokens */
+  --ease-base: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-layout: 500ms;
+  --duration-hover: 300ms;
+  --duration-reveal: 700ms;
+}
+
+/* Base Reset & Safety */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-primary);
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Never use italic fonts anywhere in the interface (Rule B1) */
+*, *::before, *::after {
+  font-style: normal !important;
+}
+
+/* B1. Copy Rules: No orphaned words */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, li, blockquote {
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   B1. NAMED TEXT STYLES (Exact naming & scale from specification)
+   ========================================================================== */
+
+.heading-1 {
+  font-family: var(--font-primary);
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.heading-2 {
+  font-family: var(--font-primary);
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.heading-3 {
+  font-family: var(--font-primary);
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.heading-4 {
+  font-family: var(--font-primary);
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.heading-5 {
+  font-family: var(--font-primary);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.heading-6 {
+  font-family: var(--font-primary);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.title-1 {
+  font-family: var(--font-primary);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.title-2 {
+  font-family: var(--font-primary);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.title-3 {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.title-4 {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.title-5 {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.body-1 {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.body-2 {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.body-3 {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.body-4 {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.body-5 {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.body-6 {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.button-lg {
+  font-family: var(--font-primary);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.button-md {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.button-sm {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.button-xsm {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.caption-1 {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.caption-2 {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.caption-3 {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.caption-4 {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.caption-5 {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   B4 & B5. HERO HEADING GRADIENT (Rule B5)
+   Dark theme: left to right gradient on heading text ONLY (#FFFFFF -> #9B9B9B)
+   ========================================================================== */
+
+.hero-heading-gradient {
+  background: linear-gradient(90deg, #FFFFFF 0%, #9B9B9B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  max-width: 680px;
+}
+
+.hero-subheading {
+  max-width: 680px;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   B2. BUTTONS & INTERACTIVE STATES (Rule B2 & B9)
+   Main buttons: 8px vertical padding, 12px horizontal padding
+   ========================================================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-75);
+  padding: 8px 12px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #FFFFFF;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--duration-hover) var(--ease-base),
+              background-color var(--duration-hover) var(--ease-base),
+              opacity var(--duration-hover) var(--ease-base);
+}
+
+.btn-primary:hover {
+  background-color: #E5E5E5;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-75);
+  padding: 8px 12px;
+  background-color: var(--surface-card);
+  color: var(--text-primary);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--duration-hover) var(--ease-base),
+              background-color var(--duration-hover) var(--ease-base),
+              border-color var(--duration-hover) var(--ease-base);
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface-card-subtle);
+  border-color: var(--text-muted);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+.btn-sm-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-50);
+  padding: 6px 10px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #FFFFFF;
+  border-radius: var(--radius-md);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--duration-hover) var(--ease-base),
+              background-color var(--duration-hover) var(--ease-base);
+}
+
+.btn-sm-header:hover {
+  background-color: #E5E5E5;
+  transform: translateY(-1px);
+}
+
+.btn-sm-header:active {
+  transform: scale(0.98);
+}
+
+.btn-sm-header:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   B4. CARDS & BORDERS (Rule B4)
+   Never apply a border to only one side of a card. All the way around or none.
+   Never use gradients in backgrounds. Flat surfaces only.
+   ========================================================================== */
+
+.surface-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-300);
+  transition: transform var(--duration-hover) var(--ease-base),
+              border-color var(--duration-hover) var(--ease-base);
+}
+
+.surface-card:hover {
+  border-color: var(--surface-border-subtle);
+  transform: translateY(-2px);
+}
+
+/* B3. Nested Radius Formula: inner radius = outer radius - gap */
+/* Outer card: rounded-2xl (16px), gap: spacing-200 (16px) -> inner 0 (square) */
+/* Outer card: rounded-2xl (16px), gap: spacing-75 (8px) -> inner radius = 8px (rounded-lg) */
+.surface-card .card-inner-box {
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-card-subtle);
+  border: 1px solid var(--surface-border);
+  padding: var(--spacing-200);
+}
+
+/* ==========================================================================
+   B7. FLOATING NAVIGATION (Rule B7)
+   Compact bar floating off top edge, translucent surface, backdrop blur
+   ========================================================================== */
+
+.floating-nav-wrapper {
+  position: fixed;
+  top: var(--spacing-200);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--spacing-200);
+  pointer-events: none;
+}
+
+.floating-nav {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-300);
+  background-color: rgba(24, 24, 24, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  transition: transform var(--duration-hover) var(--ease-base),
+              border-color var(--duration-hover) var(--ease-base);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+  transition: color var(--duration-hover) var(--ease-base),
+              background-color var(--duration-hover) var(--ease-base);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+.nav-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--accent-emerald-subtle);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--accent-emerald);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.nav-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-emerald);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ==========================================================================
+   B11. TAGLINE REVEAL SECTION (Mandatory Component)
+   Word by word scroll opacity animation on base curve
+   ========================================================================== */
+
+.tagline-section {
+  padding: var(--spacing-800) var(--spacing-300);
+  background-color: var(--surface-base);
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--surface-border);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.tagline-container {
+  max-width: 680px;
+  text-align: center;
+}
+
+.tagline-word {
+  display: inline-block;
+  color: var(--text-primary);
+  opacity: 0.28; /* Starts in subtle muted tone (25-35%) */
+  transition: opacity var(--duration-layout) var(--ease-base),
+              transform var(--duration-layout) var(--ease-base);
+  margin-right: 0.28em;
+}
+
+.tagline-word.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   B7. SCROLL REVEALS
+   Sections rise Spacing-400 (32px) and fade in on base curve
+   ========================================================================== */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--duration-reveal) var(--ease-base),
+              transform var(--duration-reveal) var(--ease-base);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & SKIP LINK (Rule B10)
+   ========================================================================== */
+
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: var(--spacing-200);
+  background-color: #FFFFFF;
+  color: #000000;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  z-index: 1000;
+  text-decoration: none;
+  transition: top var(--duration-hover) var(--ease-base);
+}
+
+.skip-to-content:focus {
+  top: var(--spacing-200);
+  outline: 2px solid #FFFFFF;
+}
+
+/* ==========================================================================
+   B9. FORM & MODAL STATES (Rule B9)
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-300);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-hover) var(--ease-base);
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container {
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+  max-width: 520px;
+  width: 100%;
+  padding: var(--spacing-400);
+  transform: scale(0.96) translateY(12px);
+  transition: transform var(--duration-layout) var(--ease-base);
+}
+
+.modal-backdrop.is-open .modal-container {
+  transform: scale(1) translateY(0);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--spacing-75);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  background-color: var(--surface-card-subtle);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  transition: border-color var(--duration-hover) var(--ease-base);
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 1px #FFFFFF;
+}
+
+.form-error {
+  display: none;
+  color: #EF4444;
+  font-size: 12px;
+  margin-top: var(--spacing-50);
+}
+
+.form-error.is-active {
+  display: block;
+}
+
+/* ==========================================================================
+   ALGORITHM VISUALIZER INTERACTIVE DEMO (Project Showcase)
+   ========================================================================== */
+
+.algo-canvas-box {
+  background-color: var(--surface-card-subtle);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-200);
+  margin-top: var(--spacing-200);
+}
+
+.algo-bar-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  height: 140px;
+  padding-bottom: 8px;
+}
+
+.algo-bar {
+  width: 12px;
+  background-color: var(--text-muted);
+  border-radius: 2px 2px 0 0;
+  transition: height 120ms ease, background-color 120ms ease;
+}
+
+.algo-bar.comparing {
+  background-color: var(--accent-amber);
+}
+
+.algo-bar.sorted {
+  background-color: var(--accent-emerald);
+}
+
+/* ==========================================================================
+   MOBILE & VIEWPORT RESPONSIVENESS (Rule B10 Check at 390px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .heading-1 {
+    font-size: 40px;
+    line-height: 44px;
+  }
+  .heading-2 {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .heading-3 {
+    font-size: 26px;
+    line-height: 32px;
+  }
+  .floating-nav {
+    padding: 6px 12px;
+    gap: var(--spacing-100);
+  }
+  .floating-nav .nav-desktop-only {
+    display: none;
+  }
+}
+
+/* B7. Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .tagline-word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

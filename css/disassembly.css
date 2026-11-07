@@ -1,0 +1,643 @@
+/* ==========================================================================
+   HARSHITH — 3D AI DISASSEMBLY & TYPOGRAPHIC EXPERIENCE
+   Palette Foundation:
+   - Primary: #2F4454 (Deep desaturated blue)
+   - Secondary: #2E151B (Dark burgundy)
+   - Accent: #DA7B93 (Vibrant dusty pink)
+   - Additional: #376E6F (Deep teal)
+   - Background: #1C3334 (Dark green-teal)
+   - Highlights: Icy cyan (#67E8F9), Electric lavender (#B794F4), Soft coral (#FB7185)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Palette Foundations */
+  --c-primary: #2F4454;
+  --c-secondary: #2E151B;
+  --c-accent: #DA7B93;
+  --c-teal: #376E6F;
+  --c-bg: #1C3334;
+
+  /* Highlights */
+  --c-cyan: #67E8F9;
+  --c-lavender: #B794F4;
+  --c-coral: #FB7185;
+
+  /* Typography */
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+
+  /* Surfaces */
+  --surface-panel: rgba(47, 68, 84, 0.4);
+  --surface-border: rgba(218, 123, 147, 0.22);
+  --surface-border-subtle: rgba(55, 110, 111, 0.35);
+
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #B4C5CF;
+  --text-muted: #7A939E;
+
+  /* Spacings */
+  --spacing-0: 0px;
+  --spacing-25: 2px;
+  --spacing-50: 4px;
+  --spacing-75: 8px;
+  --spacing-100: 12px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-700: 64px;
+  --spacing-800: 80px;
+  --spacing-900: 96px;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --ease-base: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-layout: 500ms;
+  --duration-hover: 300ms;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  background-color: var(--c-bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Lenis Recommended Root Setup */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.5;
+  cursor: none;
+}
+
+/* No italics rule (B1) */
+*, *::before, *::after {
+  font-style: normal !important;
+}
+
+/* No orphaned words */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, li, blockquote {
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   FIXED 3D BACKGROUND STAGE FOR THE AI DISASSEMBLY CORE
+   ========================================================================== */
+
+#webgl-background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#ai-core-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Content layer sits on top of 3D environment */
+.app-content-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+/* ==========================================================================
+   CUSTOM MAGNETIC CURSOR
+   ========================================================================== */
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--c-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 80ms ease, background-color var(--duration-hover) var(--ease-base);
+  box-shadow: 0 0 14px var(--c-accent);
+}
+
+.custom-cursor-aura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(218, 123, 147, 0.5);
+  background-color: rgba(218, 123, 147, 0.08);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 300ms var(--ease-base),
+              height 300ms var(--ease-base),
+              border-color 300ms var(--ease-base),
+              background-color 300ms var(--ease-base);
+}
+
+body.cursor-hover .custom-cursor-aura {
+  width: 70px;
+  height: 70px;
+  border-color: var(--c-cyan);
+  background-color: rgba(103, 232, 249, 0.12);
+}
+
+body.cursor-hover .custom-cursor-dot {
+  background-color: var(--c-cyan);
+  box-shadow: 0 0 18px var(--c-cyan);
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+@media (pointer: coarse) {
+  body {
+    cursor: auto !important;
+  }
+  .custom-cursor-dot, .custom-cursor-aura {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   FLOATING NAVIGATION BAR
+   ========================================================================== */
+
+.floating-nav {
+  position: fixed;
+  top: var(--spacing-200);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-300);
+  background: rgba(28, 51, 52, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  padding: 8px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.nav-brand {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-accent);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+}
+
+.nav-link {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-hover) var(--ease-base);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(218, 123, 147, 0.12);
+  border: 1px solid var(--surface-border);
+  color: var(--c-accent);
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   HERO: MASSIVE TYPOGRAPHIC IDENTITY — "HARSHITH"
+   ========================================================================== */
+
+#hero-stage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-800) var(--spacing-300) var(--spacing-600);
+  overflow: hidden;
+}
+
+.hero-identity-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-200);
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  perspective: 1200px;
+}
+
+/* The Massive "HARSHITH" Display Heading */
+.hero-massive-name {
+  font-family: var(--font-display);
+  font-size: clamp(68px, 15vw, 190px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-letter {
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition: transform 240ms var(--ease-base), color 240ms var(--ease-base), text-shadow 240ms var(--ease-base);
+  will-change: transform;
+}
+
+.hero-letter:hover {
+  color: var(--c-accent);
+  text-shadow: 0 0 40px rgba(218, 123, 147, 0.8), 0 0 80px rgba(103, 232, 249, 0.4);
+  transform: translateZ(45px) rotateY(12deg) scale(1.08);
+}
+
+.hero-minimal-subline {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 2vw, 14px);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--c-cyan);
+  text-transform: uppercase;
+  margin-top: var(--spacing-100);
+  opacity: 0.9;
+}
+
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 28px;
+  margin-top: var(--spacing-500);
+  background: rgba(218, 123, 147, 0.16);
+  color: #FFFFFF;
+  border: 1px solid var(--c-accent);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(218, 123, 147, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--duration-hover) var(--ease-base);
+}
+
+.hero-cta-btn:hover {
+  background: var(--c-accent);
+  color: #1A0D11;
+  box-shadow: 0 12px 42px rgba(218, 123, 147, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Disassembly status tracker widget in Hero - Independent flow positioning */
+.disassembly-status-bar {
+  position: relative;
+  margin-top: var(--spacing-400);
+  margin-bottom: var(--spacing-200);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 16px;
+  background: rgba(20, 36, 37, 0.65);
+  border: 1px solid var(--surface-border-subtle);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.status-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-cyan);
+  box-shadow: 0 0 8px var(--c-cyan);
+}
+
+/* ==========================================================================
+   EDITORIAL SECTIONS WITH DRAMATIC TYPOGRAPHY
+   ========================================================================== */
+
+.editorial-section {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: var(--spacing-900) var(--spacing-400);
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-index-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--c-accent);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-100);
+  display: inline-block;
+}
+
+.section-editorial-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6vw, 76px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin-bottom: var(--spacing-400);
+}
+
+.editorial-grid-2col {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--spacing-600);
+  align-items: center;
+}
+
+/* Translucent frosted glass panel */
+.editorial-glass-panel {
+  background: rgba(28, 51, 52, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-500);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+.editorial-body-text {
+  font-size: 17px;
+  line-height: 28px;
+  color: var(--text-secondary);
+}
+
+.editorial-body-text p + p {
+  margin-top: var(--spacing-200);
+}
+
+/* ==========================================================================
+   JOURNEY: SPATIAL TIMELINE
+   ========================================================================== */
+
+.journey-path-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-400);
+  position: relative;
+}
+
+.journey-entry {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--spacing-300);
+  align-items: start;
+  padding: var(--spacing-300);
+  background: rgba(46, 21, 27, 0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+  transition: transform var(--duration-hover) var(--ease-base),
+              border-color var(--duration-hover) var(--ease-base);
+}
+
+.journey-entry:hover {
+  transform: translateX(8px);
+  border-color: var(--c-accent);
+}
+
+.journey-entry-year {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--c-accent);
+}
+
+/* ==========================================================================
+   PROJECTS: 3D INTERACTIVE GALLERY & ALGORITHM VISUALIZER
+   ========================================================================== */
+
+.projects-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-600);
+}
+
+.project-card-3d {
+  background: rgba(28, 51, 52, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-500);
+  transition: transform var(--duration-layout) var(--ease-base),
+              border-color var(--duration-hover) var(--ease-base),
+              box-shadow var(--duration-hover) var(--ease-base);
+}
+
+.project-card-3d:hover {
+  border-color: var(--c-accent);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+/* Pill tags */
+.pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(47, 68, 84, 0.45);
+  border: 1px solid var(--surface-border);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-family: var(--font-mono);
+}
+
+/* Action button */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  background: rgba(218, 123, 147, 0.15);
+  border: 1px solid var(--c-accent);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  transition: all var(--duration-hover) var(--ease-base);
+}
+
+.pill-btn:hover {
+  background: var(--c-accent);
+  color: #1A0D11;
+}
+
+/* ==========================================================================
+   CONSTELLATION & VISION
+   ========================================================================== */
+
+.constellation-frame {
+  width: 100%;
+  height: 520px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--surface-border);
+  background: rgba(20, 36, 37, 0.55);
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+#constellation-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.vision-monument {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--spacing-800) var(--spacing-400);
+  background: rgba(46, 21, 27, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-2xl);
+}
+
+/* ==========================================================================
+   CONTACT
+   ========================================================================== */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-600);
+  align-items: start;
+}
+
+.input-field, .textarea-field {
+  width: 100%;
+  background: rgba(20, 36, 37, 0.85);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 14px;
+  margin-top: 6px;
+  transition: border-color var(--duration-hover) var(--ease-base);
+}
+
+.input-field:focus, .textarea-field:focus {
+  outline: none;
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 1px var(--c-accent);
+}
+
+/* ==========================================================================
+   RESPONSIVENESS (Checked at 390px)
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .editorial-grid-2col, .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .hero-massive-name {
+    font-size: clamp(48px, 16vw, 92px);
+  }
+  .floating-nav .nav-desktop-only {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
