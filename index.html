@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARSHITH — 3D AI Computational Core &amp; Interactive Space</title>
+  <meta name="description" content="Personal digital universe of Harshith S., a B.Tech Artificial Intelligence and Machine Learning student at NIAT exploring creative development, algorithms, and intelligent systems.">
+  <meta name="author" content="Harshith S.">
+  <meta name="theme-color" content="#1C3334">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HARSHITH — 3D AI Computational Core">
+  <meta property="og:description" content="Interactive 3D AI structure that disassembles as you explore and rebuilds when you return.">
+  <meta property="og:url" content="https://github.com/CodeBeyondLimits">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%231C3334'/><text x='50' y='65' font-size='50' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%23DA7B93'>H</text></svg>">
+
+  <!-- External High Performance Libraries (Three.js, Lenis, GSAP) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Bespoke Disassembly & Typographic Experience Stylesheet -->
+  <link rel="stylesheet" href="css/disassembly.css">
+
+  <!-- Structured JSON-LD Schema for AEO & SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Harshith S.",
+    "jobTitle": "B.Tech Artificial Intelligence and Machine Learning Student",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "NextWave Institute of Advanced Technologies (NIAT)"
+    },
+    "email": "sharshith346@gmail.com",
+    "sameAs": [
+      "https://github.com/CodeBeyondLimits",
+      "https://www.linkedin.com/in/harshith-s-4434a83a8"
+    ],
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Java",
+      "Python",
+      "C++",
+      "JavaScript",
+      "React",
+      "3D Creative Development"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Accessible Skip Link (Rule B10) -->
+  <a href="#about" class="pill-btn" style="position: absolute; top: -100px; left: 16px; z-index: 10000; transition: top 300ms ease;" onfocus="this.style.top='16px'" onblur="this.style.top='-100px'">
+    Skip to primary experience
+  </a>
+
+  <!-- ==========================================================================
+       FIXED BACKGROUND 3D STAGE: DISASSEMBLING AI COMPUTATIONAL CORE
+       This 3D machine occupies the background across the entire scroll journey.
+       As you scroll down, it dismantles. As you scroll up, it reassembles.
+       ========================================================================== -->
+  <div id="webgl-background-container" aria-hidden="true">
+    <canvas id="ai-core-canvas"></canvas>
+  </div>
+
+  <!-- Floating Navigation -->
+  <header role="banner">
+    <nav class="floating-nav" aria-label="Main Navigation">
+      <a href="#hero-stage" class="nav-brand">HARSHITH.SPACE</a>
+
+      <div class="nav-links nav-desktop-only">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#journey" class="nav-link">Journey</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#toolkit" class="nav-link">Toolkit</a>
+        <a href="#vision" class="nav-link">Vision</a>
+      </div>
+
+      <div class="nav-badge nav-desktop-only">
+        <span>B.Tech AI &amp; ML · NIAT</span>
+      </div>
+
+      <a href="#contact" class="pill-btn" style="padding: 6px 16px; font-size: 12px; background: var(--c-accent); color: #1A0D11;">
+        <span>Connect</span>
+      </a>
+    </nav>
+  </header>
+
+  <div class="app-content-wrapper">
+
+    <!-- ==========================================================================
+         HERO SECTION: THE TYPOGRAPHIC MONUMENT — "HARSHITH"
+         Massive 3D responsive typography, interactive letter physics, minimal CTA
+         ========================================================================== -->
+    <section id="hero-stage" aria-label="Harshith Typographic Identity">
+      <div class="hero-identity-container">
+        
+        <span class="pill-tag" style="margin-bottom: var(--spacing-100);">
+          <span style="color: var(--c-cyan);">●</span> NextWave Institute of Advanced Technologies (NIAT)
+        </span>
+
+        <!-- Massive Interactive Typographic Identity -->
+        <h1 class="hero-massive-name" aria-label="Harshith">
+          <span class="hero-letter">H</span>
+          <span class="hero-letter">A</span>
+          <span class="hero-letter">R</span>
+          <span class="hero-letter">S</span>
+          <span class="hero-letter">H</span>
+          <span class="hero-letter">I</span>
+          <span class="hero-letter">T</span>
+          <span class="hero-letter">H</span>
+        </h1>
+
+        <!-- Minimal Subline (Strictly No Hyphens in Text) -->
+        <p class="hero-minimal-subline">
+          AI AND MACHINE LEARNING STUDENT • CREATIVE DEVELOPER • TECHNOLOGY ENTHUSIAST
+        </p>
+
+        <!-- Minimal Interactive CTA -->
+        <a href="#about" class="hero-cta-btn">
+          <span>EXPLORE MY WORLD</span>
+          <span data-icon="ArrowUpRight"></span>
+        </a>
+
+        <!-- Disassembly Status Tracker Widget -->
+        <div class="disassembly-status-bar">
+          <span class="status-pulse-dot"></span>
+          <span id="disassembly-status-text">CORE ASSEMBLED [0% DISPERSED]</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 1: WHO AM I
+         Editorial Scale, Authentic Student Identity, 3D Interactive Sculpture
+         ========================================================================== -->
+    <section id="about" class="editorial-section" aria-label="About Harshith">
+      <div class="editorial-grid-2col">
+        
+        <div>
+          <span class="section-index-num">01 // WHO AM I</span>
+          <h2 class="section-editorial-title">
+            Driven by curiosity and a desire to build.
+          </h2>
+
+          <div class="editorial-glass-panel">
+            <div class="editorial-body-text">
+              <p>
+                I am Harshith S., an undergraduate student pursuing my B.Tech in Artificial Intelligence and Machine Learning at NIAT in India.
+              </p>
+              <p>
+                This space is not a corporate portfolio. I am not pretending to have ten years of enterprise experience. I am an ambitious student deeply fascinated by computer science, machine learning models, algorithmic patterns, and futuristic creative web systems.
+              </p>
+              <p>
+                I believe that mastering technology requires fearless experimentation. Rather than passively reading textbooks, I write code, break down complex models, and build interactive digital tools that challenge my skills every single day.
+              </p>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--spacing-300);">
+              <span class="pill-tag">Artificial Intelligence</span>
+              <span class="pill-tag">Machine Learning</span>
+              <span class="pill-tag">Creative Development</span>
+              <span class="pill-tag">Algorithmic Thinking</span>
+              <span class="pill-tag">Continuous Learning</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Sculpture Box -->
+        <div style="height: 440px; border-radius: var(--radius-2xl); border: 1px solid var(--surface-border); background: rgba(20, 36, 37, 0.45); backdrop-filter: blur(16px); position: relative; overflow: hidden;" title="Move cursor to interact with the neural sculpture">
+          <canvas id="about-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
+          <div style="position: absolute; bottom: 14px; left: 16px; font-family: var(--font-mono); font-size: 11px; color: var(--c-cyan);">
+            [ NEURAL TOPOLOGY // ROTATING SCULPTURE ]
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: THE EVOLVING JOURNEY
+         Spatial Timeline, Connected Milestones
+         ========================================================================== -->
+    <section id="journey" class="editorial-section" aria-label="My Evolution">
+      <div style="margin-bottom: var(--spacing-600);">
+        <span class="section-index-num">02 // THE EVOLVING JOURNEY</span>
+        <h2 class="section-editorial-title">
+          My path as an aspiring engineer
+        </h2>
+        <p class="editorial-body-text" style="max-width: 680px;">
+          Tracking the key milestones that shaped my passion for programming, algorithms, and artificial intelligence.
+        </p>
+      </div>
+
+      <div class="journey-path-list">
+        
+        <!-- Milestone 1 -->
+        <article class="journey-entry">
+          <span class="journey-entry-year">01</span>
+          <div>
+            <span class="pill-tag" style="margin-bottom: 6px; font-size: 11px; color: var(--c-cyan);">Genesis</span>
+            <h3 style="font-size: 20px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+              Writing the first lines of code
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 24px;">
+              Discovering that programming is not merely academic theory, it is a creative canvas where one can conceive an idea and immediately build it into existence through pure logic.
+            </p>
+          </div>
+        </article>
+
+        <!-- Milestone 2 -->
+        <article class="journey-entry">
+          <span class="journey-entry-year">02</span>
+          <div>
+            <span class="pill-tag" style="margin-bottom: 6px; font-size: 11px; color: var(--c-accent);">Language Fluency</span>
+            <h3 style="font-size: 20px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+              Mastering Java, Python, and C++
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 24px;">
+              Diving deep into foundational computer science languages. Learning the memory discipline of C++, the structured object design of Java, and the computational agility of Python.
+            </p>
+          </div>
+        </article>
+
+        <!-- Milestone 3 -->
+        <article class="journey-entry">
+          <span class="journey-entry-year">03</span>
+          <div>
+            <span class="pill-tag" style="margin-bottom: 6px; font-size: 11px; color: var(--c-lavender);">Optimization</span>
+            <h3 style="font-size: 20px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+              Data structures and algorithmic rigor
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 24px;">
+              Investigating time complexity, memory allocation, and algorithmic paradigms. Understanding how efficient sorting and data structures power global software architectures.
+            </p>
+          </div>
+        </article>
+
+        <!-- Milestone 4 -->
+        <article class="journey-entry">
+          <span class="journey-entry-year">04</span>
+          <div>
+            <span class="pill-tag" style="margin-bottom: 6px; font-size: 11px; color: var(--c-cyan);">Specialization</span>
+            <h3 style="font-size: 20px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+              Artificial Intelligence and Machine Learning at NIAT
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 24px;">
+              Commencing specialized B.Tech studies at the NextWave Institute of Advanced Technologies. Expanding into predictive models, generative AI integrations, and practical automated systems.
+            </p>
+          </div>
+        </article>
+
+        <!-- Milestone 5 -->
+        <article class="journey-entry">
+          <span class="journey-entry-year">05</span>
+          <div>
+            <span class="pill-tag" style="margin-bottom: 6px; font-size: 11px; color: var(--c-accent);">Active Horizon</span>
+            <h3 style="font-size: 20px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+              Building interactive systems and aiming for global impact
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 24px;">
+              Synthesizing creative web development, Three.js 3D rendering, and applied machine learning models while preparing for challenging engineering roles at leading technology companies.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: THINGS I HAVE BUILT
+         Futuristic Gallery with Live Algorithm Visualizer Simulation
+         ========================================================================== -->
+    <section id="projects" class="editorial-section" aria-label="Featured Projects">
+      <div style="margin-bottom: var(--spacing-600);">
+        <span class="section-index-num">03 // THINGS I HAVE BUILT</span>
+        <h2 class="section-editorial-title">
+          Selected builds and experiments
+        </h2>
+        <p class="editorial-body-text" style="max-width: 680px;">
+          Real software projects demonstrating my curiosity in graphics engineering, algorithm visualization, and modern machine learning endpoints.
+        </p>
+      </div>
+
+      <div class="projects-flow">
+
+        <!-- PROJECT 1: Personal Interactive Portfolio Platform -->
+        <article class="project-card-3d">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--spacing-200); margin-bottom: var(--spacing-300);">
+            <div>
+              <span class="pill-tag" style="color: var(--c-cyan); margin-bottom: 8px;">Creative Engineering</span>
+              <h3 style="font-size: 28px; font-weight: 700; color: #FFFFFF; margin-bottom: 8px;">
+                Personal interactive portfolio platform
+              </h3>
+              <p style="color: var(--text-secondary); max-width: 720px; font-size: 16px; line-height: 26px;">
+                A cinematic web universe combining a 3D disassembling AI machine in Three.js, responsive letter perspective physics, Lenis smooth momentum scrolling, and custom magnetic cursor interactions.
+              </p>
+            </div>
+            <a href="https://github.com/CodeBeyondLimits" target="_blank" rel="noopener noreferrer" class="pill-btn">
+              <span>Source Repository</span>
+              <span data-icon="ArrowUpRight"></span>
+            </a>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--surface-border); padding-top: var(--spacing-200);">
+            <span class="pill-tag">Three.js</span>
+            <span class="pill-tag">Lenis</span>
+            <span class="pill-tag">GSAP</span>
+            <span class="pill-tag">React / Vite</span>
+            <span class="pill-tag" style="color: var(--c-cyan);">In Active Development</span>
+          </div>
+        </article>
+
+        <!-- PROJECT 2: Interactive Algorithm Visualizer (LIVE EMBEDDED DEMO) -->
+        <article class="project-card-3d">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--spacing-200); margin-bottom: var(--spacing-300);">
+            <div>
+              <span class="pill-tag" style="color: var(--c-accent); margin-bottom: 8px;">Algorithms &amp; Visual Computing</span>
+              <h3 style="font-size: 28px; font-weight: 700; color: #FFFFFF; margin-bottom: 8px;">
+                Interactive algorithm visualizer
+              </h3>
+              <p style="color: var(--text-secondary); max-width: 720px; font-size: 16px; line-height: 26px;">
+                An interactive educational engine that translates sorting algorithms and data structure operations into real time graphical animations, demonstrating algorithmic comparisons and swaps live.
+              </p>
+            </div>
+            <a href="https://github.com/CodeBeyondLimits" target="_blank" rel="noopener noreferrer" class="pill-btn">
+              <span>View Code</span>
+              <span data-icon="ArrowUpRight"></span>
+            </a>
+          </div>
+
+          <!-- Working Simulation Box Embedded Inside Project Card -->
+          <div id="algo-visualizer-container" style="background: rgba(20, 36, 37, 0.85); border: 1px solid var(--surface-border); border-radius: var(--radius-xl); padding: var(--spacing-300); margin: var(--spacing-200) 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-200); flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <label for="algo-select" style="font-family: var(--font-mono); font-size: 12px; color: var(--c-cyan);">Algorithm:</label>
+                <select id="algo-select" style="background: #1C3334; color: #FFFFFF; border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 4px 10px; font-size: 13px;">
+                  <option value="bubble">Bubble Sort</option>
+                  <option value="insertion">Insertion Sort</option>
+                </select>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span id="algo-step-count" style="font-family: var(--font-mono); font-size: 12px; color: var(--c-accent);">0 operations</span>
+                <button id="algo-play-btn" class="pill-btn" style="padding: 4px 14px; font-size: 13px; background: var(--c-accent); color: #1A0D11;">
+                  <span>Simulate</span>
+                </button>
+                <button id="algo-reset-btn" class="pill-btn" style="padding: 4px 10px; font-size: 13px;" title="Reset random array">
+                  <span data-icon="ArrowClockwise"></span>
+                </button>
+              </div>
+            </div>
+
+            <div id="algo-bars" style="display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 130px; padding-bottom: 8px;" aria-label="Sorting bars"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--surface-border-subtle); padding-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">
+              <span>Pink: Active Comparison · Cyan: In Position · Teal: Unsorted</span>
+              <span>Planned: Quick Sort &amp; Graph Traversals</span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--surface-border); padding-top: var(--spacing-200);">
+            <span class="pill-tag">Java</span>
+            <span class="pill-tag">Python</span>
+            <span class="pill-tag">JavaScript</span>
+            <span class="pill-tag">React</span>
+            <span class="pill-tag" style="color: var(--c-cyan);">Status: In Development</span>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: AI-Powered Applications -->
+        <article class="project-card-3d">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--spacing-200); margin-bottom: var(--spacing-300);">
+            <div>
+              <span class="pill-tag" style="color: var(--c-lavender); margin-bottom: 8px;">Applied Intelligence</span>
+              <h3 style="font-size: 28px; font-weight: 700; color: #FFFFFF; margin-bottom: 8px;">
+                Machine learning application experiments
+              </h3>
+              <p style="color: var(--text-secondary); max-width: 720px; font-size: 16px; line-height: 26px;">
+                Prototyping practical applications leveraging modern large language model endpoints, prompt pipelines, automated tool calling, and responsive user interfaces.
+              </p>
+            </div>
+            <a href="https://github.com/CodeBeyondLimits" target="_blank" rel="noopener noreferrer" class="pill-btn">
+              <span>View Repositories</span>
+              <span data-icon="ArrowUpRight"></span>
+            </a>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--surface-border); padding-top: var(--spacing-200);">
+            <span class="pill-tag">Python</span>
+            <span class="pill-tag">LLM APIs</span>
+            <span class="pill-tag">Automation</span>
+            <span class="pill-tag">Git / GitHub</span>
+            <span class="pill-tag" style="color: var(--c-lavender);">Status: Exploring &amp; Building</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: TECHNICAL TOOLKIT
+         Interactive 3D Celestial Constellation Galaxy
+         ========================================================================== -->
+    <section id="toolkit" class="editorial-section" aria-label="Technical Toolkit">
+      <div style="margin-bottom: var(--spacing-400);">
+        <span class="section-index-num">04 // MY TOOLKIT</span>
+        <h2 class="section-editorial-title">
+          Constellation of capabilities
+        </h2>
+        <p class="editorial-body-text" style="max-width: 680px;">
+          An orbital 3D celestial constellation representing programming languages, frontend tools, and machine learning foundations I explore daily.
+        </p>
+      </div>
+
+      <div class="constellation-frame">
+        <canvas id="constellation-canvas"></canvas>
+        <div style="position: absolute; bottom: 16px; right: 20px; background: rgba(20, 36, 37, 0.75); border: 1px solid var(--surface-border-subtle); padding: 6px 12px; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">
+          <span>MOVE CURSOR TO ROTATE GALAXY</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: MY VISION
+         Cinematic Futuristic Statement on Intelligent Systems
+         ========================================================================== -->
+    <section id="vision" class="editorial-section" aria-label="Vision for the Future">
+      <div class="vision-monument">
+        <span class="section-index-num">05 // THE HORIZON</span>
+        <h2 class="section-editorial-title" style="margin-bottom: var(--spacing-300);">
+          Engineering intelligence that shapes tomorrow
+        </h2>
+
+        <div style="max-width: 760px; margin: 0 auto; color: var(--text-secondary); font-size: 18px; line-height: 30px;">
+          <p>
+            My long term ambition is to become an Artificial Intelligence and Machine Learning engineer contributing to transformative, high impact technologies at leading global technology companies.
+          </p>
+          <p style="margin-top: var(--spacing-200);">
+            I am particularly drawn to autonomous intelligence, intelligent agents, robotics, and creating software that bridges complex mathematical models with beautiful, intuitive human experiences.
+          </p>
+          <p style="margin-top: var(--spacing-200);">
+            I believe that true engineering excellence is about continuous curiosity, boundless ambition, and having the passion to build what hasn't been built before.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: LET US CONNECT
+         Collaboration, Exchanging Ideas, Student Network
+         ========================================================================== -->
+    <section id="contact" class="editorial-section" aria-label="Connect With Harshith">
+      <div class="contact-layout">
+        
+        <div>
+          <span class="section-index-num">06 // COLLABORATION</span>
+          <h2 class="section-editorial-title">
+            Let us explore and create together
+          </h2>
+
+          <p class="editorial-body-text" style="margin-bottom: var(--spacing-400);">
+            I am always thrilled to connect with fellow students, developers, researchers, and creators. Whether you want to discuss AI models, build an ambitious prototype together, or simply exchange perspectives on emerging technology, reach out anytime.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: var(--spacing-200);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span data-icon="EnvelopeSimple" style="color: var(--c-accent); font-size: 20px;"></span>
+              <a href="mailto:sharshith346@gmail.com" style="color: #FFFFFF; text-decoration: none; font-size: 16px; font-weight: 600;">
+                sharshith346@gmail.com
+              </a>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span data-icon="GithubLogo" style="color: var(--c-cyan); font-size: 20px;"></span>
+              <a href="https://github.com/CodeBeyondLimits" target="_blank" rel="noopener noreferrer" style="color: #FFFFFF; text-decoration: none; font-size: 16px; font-weight: 600;">
+                github.com/CodeBeyondLimits
+              </a>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span data-icon="LinkedinLogo" style="color: var(--c-lavender); font-size: 20px;"></span>
+              <a href="https://www.linkedin.com/in/harshith-s-4434a83a8" target="_blank" rel="noopener noreferrer" style="color: #FFFFFF; text-decoration: none; font-size: 16px; font-weight: 600;">
+                linkedin.com/in/harshith-s-4434a83a8
+              </a>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: var(--spacing-400); flex-wrap: wrap;">
+            <a href="mailto:sharshith346@gmail.com?subject=Collaborating%20with%20Harshith" class="pill-btn">
+              <span data-icon="EnvelopeSimple"></span>
+              <span>Send Direct Email</span>
+            </a>
+            <a href="https://www.linkedin.com/in/harshith-s-4434a83a8" target="_blank" rel="noopener noreferrer" class="pill-btn">
+              <span data-icon="LinkedinLogo"></span>
+              <span>LinkedIn Message</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Direct Message Panel -->
+        <div class="editorial-glass-panel">
+          <h3 style="font-size: 22px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+            Transmit a note
+          </h3>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: var(--spacing-300);">
+            Have an interesting research concept, project idea, or discussion topic? Send a note directly to my inbox.
+          </p>
+
+          <form id="collab-form" novalidate>
+            <!-- Honeypot Field for Spam Protection (Hidden from human visitors) -->
+            <input type="text" name="_gotcha" id="collab-gotcha" style="display:none !important;" tabIndex="-1" autocomplete="off" aria-hidden="true">
+
+            <div style="margin-bottom: var(--spacing-200);">
+              <label for="collab-name" style="font-size: 13px; color: var(--text-secondary); font-weight: 500;">Your Name</label>
+              <input type="text" id="collab-name" class="input-field" placeholder="e.g. Alex, developer / collaborator" required>
+            </div>
+
+            <div style="margin-bottom: var(--spacing-200);">
+              <label for="collab-email" style="font-size: 13px; color: var(--text-secondary); font-weight: 500;">Your Email Address</label>
+              <input type="email" id="collab-email" class="input-field" placeholder="alex@domain.com" required>
+            </div>
+
+            <div style="margin-bottom: var(--spacing-300);">
+              <label for="collab-msg" style="font-size: 13px; color: var(--text-secondary); font-weight: 500;">Discussion Topic</label>
+              <textarea id="collab-msg" class="textarea-field" rows="4" placeholder="Share your idea or project collaboration..." required></textarea>
+            </div>
+
+            <div id="collab-error" style="display: none; color: #FB7185; font-size: 13px; line-height: 1.5; margin-bottom: 14px; padding: 10px 14px; background: rgba(251, 113, 133, 0.1); border: 1px solid rgba(251, 113, 133, 0.3); border-radius: var(--radius-md);"></div>
+
+            <button type="submit" id="collab-submit-btn" class="pill-btn" style="width: 100%; justify-content: center; padding: 12px; background: var(--c-accent); color: #1A0D11; font-weight: 700;">
+              <span id="collab-btn-text">Transmit Note</span>
+            </button>
+          </form>
+
+          <div id="collab-success" style="display: none; text-align: center; padding: var(--spacing-400) 0;">
+            <span data-icon="CheckCircle" style="color: var(--c-cyan); font-size: 32px;"></span>
+            <h4 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-top: 12px;">Note received</h4>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">
+              Thank you for reaching out. I have received your message and will reply soon.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #142425; border-top: 1px solid var(--surface-border); padding: var(--spacing-600) var(--spacing-400);">
+      <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--spacing-300);">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-200);">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--c-accent);">HARSHITH S.</span>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+              B.Tech Artificial Intelligence and Machine Learning Student · NIAT
+            </p>
+          </div>
+
+          <div style="display: flex; gap: var(--spacing-200);">
+            <a href="https://github.com/CodeBeyondLimits" target="_blank" rel="noopener noreferrer" class="nav-link" style="font-family: var(--font-mono); font-size: 12px;">GitHub</a>
+            <a href="https://www.linkedin.com/in/harshith-s-4434a83a8" target="_blank" rel="noopener noreferrer" class="nav-link" style="font-family: var(--font-mono); font-size: 12px;">LinkedIn</a>
+            <a href="mailto:sharshith346@gmail.com" class="nav-link" style="font-family: var(--font-mono); font-size: 12px;">Email</a>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-200); border-top: 1px solid var(--surface-border-subtle); padding-top: var(--spacing-200); font-size: 12px; color: var(--text-muted);">
+          <p>&copy; 2026 Harshith S. Built with experimental code and curiosity.</p>
+          <div style="display: flex; gap: 16px;">
+            <a href="#" id="trigger-404-view" style="color: var(--text-muted); text-decoration: none;">404 Matrix</a>
+            <a href="#privacy" onclick="alert('Privacy Statement: This experience does not collect telemetry or track users.'); return false;" style="color: var(--text-muted); text-decoration: none;">Privacy</a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- 404 Modal Overlay -->
+  <div id="modal-404" style="display: none; position: fixed; inset: 0; background: rgba(20, 36, 37, 0.94); backdrop-filter: blur(16px); z-index: 10000; align-items: center; justify-content: center; padding: 24px;" role="dialog" aria-modal="true" aria-label="Route Not Found">
+    <div style="max-width: 440px; width: 100%; background: #1C3334; border: 1px solid var(--surface-border); border-radius: var(--radius-2xl); padding: var(--spacing-400); text-align: center;">
+      <span style="font-family: var(--font-mono); font-size: 36px; color: var(--c-accent); font-weight: 700;">404</span>
+      <h3 style="font-size: 22px; font-weight: 700; color: #FFFFFF; margin-top: 8px;">Coordinate out of bounds</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 8px;">
+        The digital coordinate you were looking for is outside the current simulation matrix.
+      </p>
+      <div style="margin-top: 24px;">
+        <button id="close-404" class="pill-btn" style="background: var(--c-accent); color: #1A0D11; font-weight: 700; padding: 8px 22px;">
+          Return to Universe
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Application Script (ES Module) -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
